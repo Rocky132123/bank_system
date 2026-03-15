@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="text-2xl font-bold mb-6">Dashboard</h2>
+
+<!-- Stats -->
+<div class="grid grid-cols-3 gap-6 mb-8">
+
+    <div class="bg-blue-600 text-white p-6 rounded-xl shadow">
+        <p class="text-sm opacity-80">Total Balance</p>
+        <h2 class="text-3xl font-bold mt-1">₹ {{ total_balance }}</h2>
+    </div>
+
+    <div class="bg-green-600 text-white p-6 rounded-xl shadow">
+        <p class="text-sm opacity-80">Total Accounts</p>
+        <h2 class="text-3xl font-bold mt-1">{{ accounts|length }}</h2>
+    </div>
+
+    <div class="bg-orange-500 text-white p-6 rounded-xl shadow">
+        <p class="text-sm opacity-80">Total Transactions</p>
+        <h2 class="text-3xl font-bold mt-1">{{ transactions|length }}</h2>
+    </div>
+
+</div>
+
+<!-- Recent Transactions -->
+<div class="bg-white rounded-xl shadow p-6">
+    <h3 class="text-lg font-bold mb-4">Recent Transactions</h3>
+    <table class="w-full text-sm">
+        <thead>
+            <tr class="text-left text-gray-500 border-b">
+                <th class="pb-2">Account</th>
+                <th class="pb-2">Type</th>
+                <th class="pb-2">Amount</th>
+                <th class="pb-2">Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for t in transactions %}
+            <tr class="border-b hover:bg-gray-50">
+                <td class="py-2">{{ t.account }}</td>
+                <td class="py-2 capitalize">{{ t.transaction_type }}</td>
+                <td class="py-2">₹ {{ t.amount }}</td>
+                <td class="py-2">{{ t.created_at|date:"d M Y" }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4" class="py-4 text-center text-gray-400">No transactions yet.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

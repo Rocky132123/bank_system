@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="text-2xl font-bold mb-6">Profile</h2>
+
+<div class="bg-white p-6 rounded-xl shadow w-96space-y-3">
+
+    <div class="flex items-center gap-4 mb-6">
+        <div class="bg-indigo-600 text-white rounded-full w-14 h-14 flex items-center justify-center text-2xl font-bold">
+            {{ request.user.username|first|upper }}
+        </div>
+        <div>
+            <p class="font-bold text-lg">{{ request.user.username }}</p>
+            <p class="text-gray-500 text-sm">{{ request.user.email }}</p>
+        </div>
+    </div>
+
+    <div class="border-t pt-4 space-y-2 text-sm">
+        <p><span class="text-gray-500">Username:</span> <span class="font-medium">{{ request.user.username }}</span></p>
+        <p><span class="text-gray-500">Email:</span> <span class="font-medium">{{ request.user.email }}</span></p>
+        <p><span class="text-gray-500">Joined:</span> <span class="font-medium">{{ request.user.date_joined|date:"d M Y" }}</span></p>
+    </div>
+
+</div>
+
+{% endblock %}
