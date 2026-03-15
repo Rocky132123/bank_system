@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="flex justify-between items-center mb-6">
+    <h2 class="text-2xl font-bold">Accounts</h2>
+    <a href="/create-account/" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">
+        + Create Account
+    </a>
+</div>
+
+<!-- Card Grid -->
+<div class="grid grid-cols-3 gap-6">
+    {% for account in accounts %}
+    <div class="bg-gradient-to-r from-indigo-600 to-blue-600 text-white p-6 rounded-xl shadow-lg">
+
+        <p class="text-sm opacity-80 capitalize">{{ account.account_type }} Account</p>
+        <p class="text-xs opacity-60 mt-1">{{ account.branch }}</p>
+
+        <h3 class="text-xl font-semibold mt-3">
+            **** **** **** {{ account.account_number|slice:"-4:" }}
+        </h3>
+
+        <p class="text-sm opacity-70 mt-1">{{ account.customer }}</p>
+
+        <p class="mt-4 text-2xl font-bold">₹ {{ account.balance }}</p>
+
+        <div class="mt-4 flex gap-2">
+            <a href="/transfer/"  class="bg-white text-indigo-700 px-3 py-1 rounded text-sm font-medium">Transfer</a>
+            <a href="/deposit/"   class="bg-green-500 text-white px-3 py-1 rounded text-sm font-medium">Deposit</a>
+            <a href="/withdraw/"  class="bg-red-500 text-white px-3 py-1 rounded text-sm font-medium">Withdraw</a>
+        </div>
+
+    </div>
+    {% empty %}
+    <p class="text-gray-500 col-span-3">No accounts found. <a href="/create-account/" class="text-indigo-600 underline">Create one.</a></p>
+    {% endfor %}
+</div>
+
+{% endblock %}

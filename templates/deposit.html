@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="text-2xl font-bold mb-6">Deposit Money</h2>
+
+<div class="bg-white p-6 rounded-xl shadow w-96">
+    <form method="POST">
+        {% csrf_token %}
+
+        <label class="text-sm text-gray-600">Account Number</label>
+        <input type="text" name="account" placeholder="e.g. 1234567890"
+            class="border p-2 rounded w-full mb-3 mt-1" required>
+
+        <label class="text-sm text-gray-600">Amount (₹)</label>
+        <input type="number" name="amount" placeholder="0.00"
+            class="border p-2 rounded w-full mb-4 mt-1" min="1" step="0.01" required>
+
+        <button class="bg-green-600 text-white px-4 py-2 rounded w-full hover:bg-green-700">
+            Deposit
+        </button>
+    </form>
+</div>
+
+{% endblock %}
